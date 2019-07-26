@@ -42,7 +42,7 @@ public class ScenarioStore {
 		this.failed = failed;
 	}
 
-	public String getName2() {
+	public String getName() {
 		return name;
 	}
 
