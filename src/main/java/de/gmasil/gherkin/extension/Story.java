@@ -1,6 +1,6 @@
 /**
  * Gherkin Extension Jupiter
- * Copyright © 2019 Gmasil
+ * Copyright © 2022 Gmasil
  *
  * This file is part of Gherkin Extension Jupiter.
  *
@@ -27,5 +27,6 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
 public @interface Story {
-	String value();
+
+    String value();
 }

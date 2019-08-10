@@ -1,6 +1,6 @@
 /**
  * Gherkin Extension Jupiter
- * Copyright © 2019 Gmasil
+ * Copyright © 2022 Gmasil
  *
  * This file is part of Gherkin Extension Jupiter.
  *
@@ -21,5 +21,6 @@ package de.gmasil.gherkin.extension;
 
 @FunctionalInterface
 public interface GherkinRunnable {
-	public void execute() throws Exception;
+
+    public void execute() throws Exception;
 }

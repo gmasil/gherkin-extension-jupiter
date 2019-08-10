@@ -1,6 +1,6 @@
 /**
  * Gherkin Extension Jupiter
- * Copyright © 2019 Gmasil
+ * Copyright © 2022 Gmasil
  *
  * This file is part of Gherkin Extension Jupiter.
  *
@@ -26,44 +26,45 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import org.junit.jupiter.api.Test;
 
 public class GherkinRunnerTest {
-	@Test
-	public void testRunnerWithFailingStep() {
-		GherkinRunner runner = new GherkinRunner("My.class", "My.method", "My scenario");
-		runner.executeStep("a step fails", () -> {
-			assertThat("Peter", is(equalTo("Panda")));
-		}, StepType.GIVEN);
-	}
 
-	@Test
-	public void testRunnerDoesNotExecuteStepAfterFailing() {
-		GherkinRunner runner = new GherkinRunner("My.class", "My.method", "My scenario");
-		// execute GIVEN which fails
-		Reference<Boolean> givenExecuted = new Reference<>();
-		givenExecuted.set(false);
-		runner.executeStep("a step fails", () -> {
-			givenExecuted.set(true);
-			assertThat("Peter", is(equalTo("Panda")));
-		}, StepType.GIVEN);
-		// check if really executed
-		assertThat(givenExecuted.get(), is(equalTo(true)));
-		assertThat(runner.isFailed(), is(equalTo(true)));
-		// execute another step
-		Reference<Boolean> thenExecuted = new Reference<>();
-		thenExecuted.set(false);
-		runner.executeStep("this step is not executed", () -> {
-			thenExecuted.set(true);
-		}, StepType.THEN);
-		// check that step was not executed
-		assertThat(thenExecuted.get(), is(equalTo(false)));
-		assertThat(runner.getFailedStep().getName(), is(equalTo("a step fails")));
-	}
+    @Test
+    public void testRunnerWithFailingStep() {
+        GherkinRunner runner = new GherkinRunner("My.class", "My.method", "My scenario");
+        runner.executeStep("a step fails", () -> {
+            assertThat("Peter", is(equalTo("Panda")));
+        }, StepType.GIVEN);
+    }
 
-	@Test
-	public void testIsFromRecognition() {
-		GherkinRunner runner = new GherkinRunner("class", "method", "");
-		assertThat(runner.isFrom("class", "---"), is(equalTo(false)));
-		assertThat(runner.isFrom("---", "method"), is(equalTo(false)));
-		assertThat(runner.isFrom("class", "method"), is(equalTo(true)));
-		assertThat(runner.isFrom("---", "---"), is(equalTo(false)));
-	}
+    @Test
+    public void testRunnerDoesNotExecuteStepAfterFailing() {
+        GherkinRunner runner = new GherkinRunner("My.class", "My.method", "My scenario");
+        // execute GIVEN which fails
+        Reference<Boolean> givenExecuted = new Reference<>();
+        givenExecuted.set(false);
+        runner.executeStep("a step fails", () -> {
+            givenExecuted.set(true);
+            assertThat("Peter", is(equalTo("Panda")));
+        }, StepType.GIVEN);
+        // check if really executed
+        assertThat(givenExecuted.get(), is(equalTo(true)));
+        assertThat(runner.isFailed(), is(equalTo(true)));
+        // execute another step
+        Reference<Boolean> thenExecuted = new Reference<>();
+        thenExecuted.set(false);
+        runner.executeStep("this step is not executed", () -> {
+            thenExecuted.set(true);
+        }, StepType.THEN);
+        // check that step was not executed
+        assertThat(thenExecuted.get(), is(equalTo(false)));
+        assertThat(runner.getFailedStep().getName(), is(equalTo("a step fails")));
+    }
+
+    @Test
+    public void testIsFromRecognition() {
+        GherkinRunner runner = new GherkinRunner("class", "method", "");
+        assertThat(runner.isFrom("class", "---"), is(equalTo(false)));
+        assertThat(runner.isFrom("---", "method"), is(equalTo(false)));
+        assertThat(runner.isFrom("class", "method"), is(equalTo(true)));
+        assertThat(runner.isFrom("---", "---"), is(equalTo(false)));
+    }
 }

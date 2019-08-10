@@ -1,142 +1,141 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<groupId>de.gmasil</groupId>
-	<artifactId>gherkin-extension-jupiter</artifactId>
-	<version>1.1</version>
-	<name>Gherkin Extension Jupiter</name>
-	<description>JUnit Jupiter extension to write tests in gherkin style</description>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>de.gmasil</groupId>
+    <artifactId>gherkin-extension-jupiter</artifactId>
+    <version>1.2-SNAPSHOT</version>
+    <name>Gherkin Extension Jupiter</name>
+    <description>JUnit Jupiter extension to write tests in gherkin style</description>
 
-	<inceptionYear>2019</inceptionYear>
-	<url>https://bitbucket.gmasil.de/projects/SOFTES/repos/testapi/browse</url>
+    <inceptionYear>2022</inceptionYear>
+    <url>https://github.com/gmasil/gherkin-extension-jupiter</url>
 
 	<organization>
 		<name>Gmasil</name>
 		<url>https://gmasil.de</url>
 	</organization>
 
-	<licenses>
-		<license>
-			<name>GNU General Public License v3 (GPLv3)</name>
-			<url>https://www.gnu.org/licenses/gpl-3.0.txt</url>
-		</license>
-	</licenses>
+    <licenses>
+        <license>
+            <name>GNU General Public License v3 (GPLv3)</name>
+            <url>https://www.gnu.org/licenses/gpl-3.0.txt</url>
+        </license>
+    </licenses>
 
-	<properties>
-		<java.version>1.8</java.version>
-		<maven.compiler.source>1.8</maven.compiler.source>
-		<maven.compiler.target>1.8</maven.compiler.target>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<!-- versions -->
-		<junit-jupiter.version>5.5.1</junit-jupiter.version>
-		<junit-platform.version>1.5.1</junit-platform.version>
-		<jackson.version>2.9.9</jackson.version>
-		<hamcrest.version>1.3</hamcrest.version>
-		<mockito.version>2.27.0</mockito.version>
-		<!-- plugin versions -->
-		<surefire.version>2.22.2</surefire.version>
-		<failsafe.version>2.22.2</failsafe.version>
-		<jacoco.version>0.8.3</jacoco.version>
-		<source-plugin.version>3.1.0</source-plugin.version>
-		<javadoc-plugin.version>3.1.0</javadoc-plugin.version>
-		<license-plugin.version>3.0</license-plugin.version>
-		<!-- skip test config -->
-		<skipITs>true</skipITs>
-		<skip.surefire.tests>${skipTests}</skip.surefire.tests>
-		<!-- skip source and javadoc generation by default -->
-		<maven.javadoc.skip>true</maven.javadoc.skip>
-		<maven.source.skip>true</maven.source.skip>
-	</properties>
+    <properties>
+        <java.version>1.8</java.version>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <!-- versions -->
+        <junit-jupiter.version>5.5.1</junit-jupiter.version>
+        <junit-platform.version>1.5.1</junit-platform.version>
+        <jackson.version>2.9.9</jackson.version>
+        <hamcrest.version>1.3</hamcrest.version>
+        <mockito.version>2.27.0</mockito.version>
+        <!-- plugin versions -->
+        <surefire.version>2.22.2</surefire.version>
+        <failsafe.version>2.22.2</failsafe.version>
+        <jacoco.version>0.8.3</jacoco.version>
+        <source-plugin.version>3.1.0</source-plugin.version>
+        <javadoc-plugin.version>3.1.0</javadoc-plugin.version>
+        <license-plugin.version>3.0</license-plugin.version>
+        <!-- skip test config -->
+        <skipITs>true</skipITs>
+        <skip.surefire.tests>${skipTests}</skip.surefire.tests>
+        <!-- skip source and javadoc generation by default -->
+        <maven.javadoc.skip>true</maven.javadoc.skip>
+        <maven.source.skip>true</maven.source.skip>
+    </properties>
 
-	<dependencies>
-		<!-- jupiter -->
-		<dependency>
-			<groupId>org.junit.jupiter</groupId>
-			<artifactId>junit-jupiter-api</artifactId>
-			<version>${junit-jupiter.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-databind</artifactId>
-			<version>${jackson.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.fasterxml.jackson.dataformat</groupId>
-			<artifactId>jackson-dataformat-xml</artifactId>
-			<version>${jackson.version}</version>
-		</dependency>
-		<!-- test -->
-		<dependency>
-			<groupId>org.junit.jupiter</groupId>
-			<artifactId>junit-jupiter-engine</artifactId>
-			<version>${junit-jupiter.version}</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.junit.platform</groupId>
-			<artifactId>junit-platform-runner</artifactId>
-			<version>${junit-platform.version}</version>
-			<scope>test</scope>
-			<exclusions>
-				<exclusion>
-					<groupId>junit</groupId>
-					<artifactId>junit</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-		<dependency>
-			<groupId>org.junit.platform</groupId>
-			<artifactId>junit-platform-launcher</artifactId>
-			<version>${junit-platform.version}</version>
-			<scope>test</scope>
-			<exclusions>
-				<exclusion>
-					<groupId>junit</groupId>
-					<artifactId>junit</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-		<!-- hamcrest -->
-		<dependency>
-			<groupId>org.hamcrest</groupId>
-			<artifactId>hamcrest-all</artifactId>
-			<version>${hamcrest.version}</version>
-			<scope>test</scope>
-		</dependency>
-		<!-- mockito -->
-		<dependency>
-			<groupId>org.mockito</groupId>
-			<artifactId>mockito-junit-jupiter</artifactId>
-			<version>${mockito.version}</version>
-			<scope>test</scope>
-		</dependency>
-	</dependencies>
+    <dependencies>
+        <!-- jupiter -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>${junit-jupiter.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.dataformat</groupId>
+            <artifactId>jackson-dataformat-xml</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+        <!-- test -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>${junit-jupiter.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-runner</artifactId>
+            <version>${junit-platform.version}</version>
+            <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>junit</groupId>
+                    <artifactId>junit</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-launcher</artifactId>
+            <version>${junit-platform.version}</version>
+            <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>junit</groupId>
+                    <artifactId>junit</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <!-- hamcrest -->
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest-all</artifactId>
+            <version>${hamcrest.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <!-- mockito -->
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-junit-jupiter</artifactId>
+            <version>${mockito.version}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
 
-	<profiles>
-		<profile>
-			<id>full-build</id>
-			<properties>
-				<skipITs>false</skipITs>
-				<skip.surefire.tests>false</skip.surefire.tests>
-				<maven.javadoc.skip>false</maven.javadoc.skip>
-				<maven.source.skip>false</maven.source.skip>
-			</properties>
-		</profile>
-		<profile>
-			<id>integration-tests-only</id>
-			<properties>
-				<skipITs>false</skipITs>
-				<skip.surefire.tests>true</skip.surefire.tests>
-			</properties>
-		</profile>
-		<profile>
-			<id>create-docs</id>
-			<properties>
-				<maven.javadoc.skip>false</maven.javadoc.skip>
-				<maven.source.skip>false</maven.source.skip>
-			</properties>
-		</profile>
-	</profiles>
+    <profiles>
+        <profile>
+            <id>full-build</id>
+            <properties>
+                <skipITs>false</skipITs>
+                <skip.surefire.tests>false</skip.surefire.tests>
+                <maven.javadoc.skip>false</maven.javadoc.skip>
+                <maven.source.skip>false</maven.source.skip>
+            </properties>
+        </profile>
+        <profile>
+            <id>integration-tests-only</id>
+            <properties>
+                <skipITs>false</skipITs>
+                <skip.surefire.tests>true</skip.surefire.tests>
+            </properties>
+        </profile>
+        <profile>
+            <id>create-docs</id>
+            <properties>
+                <maven.javadoc.skip>false</maven.javadoc.skip>
+                <maven.source.skip>false</maven.source.skip>
+            </properties>
+        </profile>
+    </profiles>
 
 	<build>
 		<plugins>
@@ -232,7 +231,8 @@
 				<configuration>
 					<header>${project.basedir}/license/templates/gnu_gpl_v3.txt</header>
 					<properties>
-						<owner>Gmasil</owner>
+                        <owner>Gmasil</owner>
+                        <software.name>${project.name}</software.name>
 					</properties>
 					<includes>
 						<include>src/main/java/**</include>
@@ -256,14 +256,14 @@
 		</plugins>
 	</build>
 
-	<distributionManagement>
-		<repository>
-			<id>nexus</id>
-			<url>http://localhost:8081/repository/maven-releases/</url>
-		</repository>
-		<snapshotRepository>
-			<id>nexus</id>
-			<url>http://localhost:8081/repository/maven-snapshots/</url>
-		</snapshotRepository>
-	</distributionManagement>
+    <distributionManagement>
+        <repository>
+            <id>nexus</id>
+            <url>http://localhost:8081/repository/maven-releases/</url>
+        </repository>
+        <snapshotRepository>
+            <id>nexus</id>
+            <url>http://localhost:8081/repository/maven-snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
 </project>

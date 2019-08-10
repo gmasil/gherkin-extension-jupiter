@@ -1,6 +1,6 @@
 /**
  * Gherkin Extension Jupiter
- * Copyright © 2019 Gmasil
+ * Copyright © 2022 Gmasil
  *
  * This file is part of Gherkin Extension Jupiter.
  *
@@ -28,33 +28,37 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
 @JsonRootName("Scenario")
 public class ScenarioStore {
-	@JacksonXmlProperty(isAttribute = true)
-	private String name;
-	private String methodName;
-	private boolean failed = false;
-	@JacksonXmlElementWrapper(localName = "steps")
-	@JacksonXmlProperty(localName = "step")
-	private List<StepStore> steps = new LinkedList<>();
 
-	public ScenarioStore(String name, String methodName, boolean failed) {
-		this.name = name;
-		this.methodName = methodName;
-		this.failed = failed;
-	}
+    @JacksonXmlProperty(isAttribute = true)
+    private String name;
 
-	public String getName() {
-		return name;
-	}
+    private String methodName;
 
-	public String getMethodName() {
-		return methodName;
-	}
+    private boolean failed = false;
 
-	public boolean isFailed() {
-		return failed;
-	}
+    @JacksonXmlElementWrapper(localName = "steps")
+    @JacksonXmlProperty(localName = "step")
+    private List<StepStore> steps = new LinkedList<>();
 
-	public List<StepStore> getSteps() {
-		return steps;
-	}
+    public ScenarioStore(String name, String methodName, boolean failed) {
+        this.name = name;
+        this.methodName = methodName;
+        this.failed = failed;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getMethodName() {
+        return methodName;
+    }
+
+    public boolean isFailed() {
+        return failed;
+    }
+
+    public List<StepStore> getSteps() {
+        return steps;
+    }
 }

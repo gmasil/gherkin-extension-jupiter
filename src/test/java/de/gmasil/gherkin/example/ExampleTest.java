@@ -1,6 +1,6 @@
 /**
  * Gherkin Extension Jupiter
- * Copyright © 2019 Simon Oelerich
+ * Copyright © 2022 Gmasil
  *
  * This file is part of Gherkin Extension Jupiter.
  *
@@ -38,24 +38,25 @@ import de.gmasil.gherkin.extension.Story;
 @Story("A normal user may not change any system settings")
 @ExtendWith(MockitoExtension.class)
 public class ExampleTest extends GherkinTest {
-	@Mock
-	private Database database;
 
-	@Mock
-	private WebDriver driver;
+    @Mock
+    private Database database;
 
-	@Scenario("A normal user does not see the admin menu")
-	public void testNormalUserHasNoAdminMenu(Reference<User> user) {
-		given("the user 'Peter' with password 'secret' exists", () -> {
-			user.set(new User("Peter", "secret"));
-		});
-		when("the user logs in", () -> {
-			driver.fillTextfield("loginform-username", user.get().getUsername());
-			driver.fillTextfield("loginform-password", user.get().getPassword());
-			driver.clickElement("loginform-submit");
-		});
-		then("no admin menu is shown", () -> {
-			assertThat(driver.hasElement("menu-admin"), is(equalTo(false)));
-		});
-	}
+    @Mock
+    private WebDriver driver;
+
+    @Scenario("A normal user does not see the admin menu")
+    public void testNormalUserHasNoAdminMenu(Reference<User> user) {
+        given("the user 'Peter' with password 'secret' exists", () -> {
+            user.set(new User("Peter", "secret"));
+        });
+        when("the user logs in", () -> {
+            driver.fillTextfield("loginform-username", user.get().getUsername());
+            driver.fillTextfield("loginform-password", user.get().getPassword());
+            driver.clickElement("loginform-submit");
+        });
+        then("no admin menu is shown", () -> {
+            assertThat(driver.hasElement("menu-admin"), is(equalTo(false)));
+        });
+    }
 }

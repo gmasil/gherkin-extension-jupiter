@@ -1,6 +1,6 @@
 /**
  * Gherkin Extension Jupiter
- * Copyright © 2019 Gmasil
+ * Copyright © 2022 Gmasil
  *
  * This file is part of Gherkin Extension Jupiter.
  *
@@ -20,15 +20,16 @@
 package de.gmasil.gherkin.extension;
 
 public enum StepType {
-	GIVEN("Given"), WHEN("When"), THEN("Then"), AND("And");
 
-	private String name;
+    GIVEN("Given"), WHEN("When"), THEN("Then"), AND("And");
 
-	private StepType(String name) {
-		this.name = name;
-	}
+    private String name;
 
-	public String getName() {
-		return name;
-	}
+    private StepType(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
 }

@@ -1,6 +1,6 @@
 /**
  * Gherkin Extension Jupiter
- * Copyright © 2019 Gmasil
+ * Copyright © 2022 Gmasil
  *
  * This file is part of Gherkin Extension Jupiter.
  *
@@ -28,27 +28,30 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
 @JsonRootName("story")
 public class StoryStore {
-	@JacksonXmlProperty(isAttribute = true)
-	private String name;
-	private String className;
-	@JacksonXmlElementWrapper(localName = "scenarios")
-	@JacksonXmlProperty(localName = "scenario")
-	private List<ScenarioStore> scenarios = new ArrayList<>();
 
-	public StoryStore(String name, String className) {
-		this.name = name;
-		this.className = className;
-	}
+    @JacksonXmlProperty(isAttribute = true)
+    private String name;
 
-	public String getName() {
-		return name;
-	}
+    private String className;
 
-	public String getClassName() {
-		return className;
-	}
+    @JacksonXmlElementWrapper(localName = "scenarios")
+    @JacksonXmlProperty(localName = "scenario")
+    private List<ScenarioStore> scenarios = new ArrayList<>();
 
-	public List<ScenarioStore> getScenarios() {
-		return scenarios;
-	}
+    public StoryStore(String name, String className) {
+        this.name = name;
+        this.className = className;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getClassName() {
+        return className;
+    }
+
+    public List<ScenarioStore> getScenarios() {
+        return scenarios;
+    }
 }

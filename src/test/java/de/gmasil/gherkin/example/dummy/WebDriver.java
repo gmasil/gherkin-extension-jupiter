@@ -1,6 +1,6 @@
 /**
  * Gherkin Extension Jupiter
- * Copyright © 2019 Simon Oelerich
+ * Copyright © 2022 Gmasil
  *
  * This file is part of Gherkin Extension Jupiter.
  *
@@ -20,15 +20,14 @@
 package de.gmasil.gherkin.example.dummy;
 
 public class WebDriver {
-	public void fillTextfield(String el, String text) {
 
-	}
+    public void fillTextfield(String el, String text) {
+    }
 
-	public void clickElement(String el) {
+    public void clickElement(String el) {
+    }
 
-	}
-
-	public boolean hasElement(String el) {
-		return false;
-	}
+    public boolean hasElement(String el) {
+        return false;
+    }
 }

@@ -1,6 +1,6 @@
 /**
  * Gherkin Extension Jupiter
- * Copyright © 2019 Gmasil
+ * Copyright © 2022 Gmasil
  *
  * This file is part of Gherkin Extension Jupiter.
  *
@@ -34,22 +34,23 @@ import org.junit.jupiter.api.parallel.ExecutionMode;
 @TestMethodOrder(OrderAnnotation.class)
 @Story("A test method only annotated with the @Scenario annotation will be executed")
 public class ScenarioTest extends GherkinTest {
-	private static boolean scenarioWasExecuted = false;
 
-	@Order(1)
-	@Scenario("A @Scenario annotated method does not require the @Test annotation")
-	public void testScenarioActsLikeTestAnnotation() {
-		when("a scenario is started", () -> {
-			scenarioWasExecuted = true;
-		});
-		then("the scenarioWasStarted flag is set to true", () -> {
-			assertThat(scenarioWasExecuted, is(equalTo(true)));
-		});
-	}
+    private static boolean scenarioWasExecuted = false;
 
-	@Test
-	@Order(2)
-	public void testIfScenarioWasActuallyExecuted() {
-		assertThat(scenarioWasExecuted, is(equalTo(true)));
-	}
+    @Order(1)
+    @Scenario("A @Scenario annotated method does not require the @Test annotation")
+    public void testScenarioActsLikeTestAnnotation() {
+        when("a scenario is started", () -> {
+            scenarioWasExecuted = true;
+        });
+        then("the scenarioWasStarted flag is set to true", () -> {
+            assertThat(scenarioWasExecuted, is(equalTo(true)));
+        });
+    }
+
+    @Test
+    @Order(2)
+    public void testIfScenarioWasActuallyExecuted() {
+        assertThat(scenarioWasExecuted, is(equalTo(true)));
+    }
 }

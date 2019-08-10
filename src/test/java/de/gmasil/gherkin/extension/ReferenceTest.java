@@ -1,6 +1,6 @@
 /**
  * Gherkin Extension Jupiter
- * Copyright © 2019 Gmasil
+ * Copyright © 2022 Gmasil
  *
  * This file is part of Gherkin Extension Jupiter.
  *
@@ -24,19 +24,20 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class ReferenceTest extends GherkinTest {
-	@Scenario("A reference can be requested")
-	public void testLoc(Reference<String> name) {
-		given("the name 'Peter' is saved in the reference", () -> {
-			name.set("Peter");
-		});
-		when("the name is changed to 'Ben'", () -> {
-			name.set("Ben");
-		});
-		then("the name is reached over to the next step", () -> {
 
-		});
-		and("the name evaluates to 'Ben' correctly", () -> {
-			assertThat(name.get(), is(equalTo("Ben")));
-		});
-	}
+    @Scenario("A reference can be requested")
+    public void testLoc(Reference<String> name) {
+        given("the name 'Peter' is saved in the reference", () -> {
+            name.set("Peter");
+        });
+        when("the name is changed to 'Ben'", () -> {
+            name.set("Ben");
+        });
+        then("the name is reached over to the next step", () -> {
+
+        });
+        and("the name evaluates to 'Ben' correctly", () -> {
+            assertThat(name.get(), is(equalTo("Ben")));
+        });
+    }
 }

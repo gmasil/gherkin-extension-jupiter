@@ -1,6 +1,6 @@
 /**
  * Gherkin Extension Jupiter
- * Copyright © 2019 Gmasil
+ * Copyright © 2022 Gmasil
  *
  * This file is part of Gherkin Extension Jupiter.
  *
@@ -20,15 +20,16 @@
 package de.gmasil.gherkin.extension;
 
 public class GherkinTest implements Gherkin {
-	private GherkinRunner runner;
 
-	@Override
-	public GherkinRunner getRunner() {
-		return runner;
-	}
+    private GherkinRunner runner;
 
-	@Override
-	public void setRunner(GherkinRunner runner) {
-		this.runner = runner;
-	}
+    @Override
+    public GherkinRunner getRunner() {
+        return runner;
+    }
+
+    @Override
+    public void setRunner(GherkinRunner runner) {
+        this.runner = runner;
+    }
 }

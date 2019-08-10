@@ -1,6 +1,6 @@
 /**
  * Gherkin Extension Jupiter
- * Copyright © 2019 Gmasil
+ * Copyright © 2022 Gmasil
  *
  * This file is part of Gherkin Extension Jupiter.
  *
@@ -48,94 +48,96 @@ import de.gmasil.gherkin.extension.store.StoryStore;
 @ExtendWith(MockitoExtension.class)
 @MockitoSettings(strictness = Strictness.LENIENT)
 public class GherkinExtensionTest {
-	@InjectMocks
-	private GherkinExtension extension = new GherkinExtension();
 
-	@Mock
-	private ExtensionContext context;
+    @InjectMocks
+    private GherkinExtension extension = new GherkinExtension();
 
-	@Mock
-	private GherkinRunner runner;
-	@Mock
-	private GherkinRunnerHolder holder;
+    @Mock
+    private ExtensionContext context;
 
-	@Mock
-	private Store store;
+    @Mock
+    private GherkinRunner runner;
 
-	@Mock
-	private StoryStore storyStore;
+    @Mock
+    private GherkinRunnerHolder holder;
 
-	@BeforeEach
-	public void initMocks() throws Exception {
-		MockitoAnnotations.initMocks(this);
-		// prepare runner
-		when(runner.isFrom(any(), any())).thenReturn(true);
-		when(runner.isFailed()).thenReturn(true);
-		when(holder.getRunner()).thenReturn(runner);
-		// prepare store
-		when(store.get(any(), eq(StoryStore.class))).thenReturn(storyStore);
-		// prepare context
-		when(context.getRequiredTestInstance()).thenReturn(holder);
-		when(context.getRequiredTestClass()).then(invocation -> GherkinExtensionTest.class);
-		when(context.getRequiredTestMethod())
-				.thenReturn(GherkinExtensionTest.class.getDeclaredMethod("testMockMethod"));
-		when(context.getRoot()).thenReturn(context);
-		when(context.getStore(any())).thenReturn(store);
-	}
+    @Mock
+    private Store store;
 
-	@Test
-	public void testAfterEachWithAssertionError() throws Exception {
-		// prepare step
-		StepStore step = new StepStore("someStapName", StepType.GIVEN, ExecutionStatus.FAILED,
-				new AssertionError("A != B"));
-		when(runner.getFailedStep()).thenReturn(step);
-		// execute method
-		assertThrows(RuntimeException.class, () -> {
-			extension.afterEach(context);
-		});
-	}
+    @Mock
+    private StoryStore storyStore;
 
-	@Test
-	public void testAfterEachWithArrayIndexOutOfBoundsException() throws Exception {
-		// prepare step
-		StepStore step = new StepStore("someStapName", StepType.GIVEN, ExecutionStatus.FAILED,
-				new ArrayIndexOutOfBoundsException("Index: 3"));
-		when(runner.getFailedStep()).thenReturn(step);
-		// execute method
-		assertThrows(ArrayIndexOutOfBoundsException.class, () -> {
-			extension.afterEach(context);
-		});
-	}
+    @BeforeEach
+    public void initMocks() throws Exception {
+        MockitoAnnotations.initMocks(this);
+        // prepare runner
+        when(runner.isFrom(any(), any())).thenReturn(true);
+        when(runner.isFailed()).thenReturn(true);
+        when(holder.getRunner()).thenReturn(runner);
+        // prepare store
+        when(store.get(any(), eq(StoryStore.class))).thenReturn(storyStore);
+        // prepare context
+        when(context.getRequiredTestInstance()).thenReturn(holder);
+        when(context.getRequiredTestClass()).then(invocation -> GherkinExtensionTest.class);
+        when(context.getRequiredTestMethod())
+                .thenReturn(GherkinExtensionTest.class.getDeclaredMethod("testMockMethod"));
+        when(context.getRoot()).thenReturn(context);
+        when(context.getStore(any())).thenReturn(store);
+    }
 
-	@Test
-	public void testAfterEachWithoutExceptionAvailable() throws Exception {
-		// prepare step
-		StepStore step = new StepStore("someStapName", StepType.GIVEN, ExecutionStatus.FAILED, null);
-		when(runner.getFailedStep()).thenReturn(step);
-		// execute method
-		try {
-			extension.afterEach(context);
-			fail("extension.afterEach(context) should have thrown an exception");
-		} catch (Exception e) {
-			assertThat(e, is(instanceOf(IllegalStateException.class)));
-			assertThat(e.getMessage(), is(equalTo(
-					String.format("The step '%s' failed, but there was no exception available", "someStapName"))));
-		}
-	}
+    @Test
+    public void testAfterEachWithAssertionError() throws Exception {
+        // prepare step
+        StepStore step = new StepStore("someStapName", StepType.GIVEN, ExecutionStatus.FAILED,
+                new AssertionError("A != B"));
+        when(runner.getFailedStep()).thenReturn(step);
+        // execute method
+        assertThrows(RuntimeException.class, () -> {
+            extension.afterEach(context);
+        });
+    }
 
-	@Test
-	public void testIfCheckRunnerReturnsFalseOnNull() {
-		when(holder.getRunner()).thenReturn(null);
-		try {
-			extension.afterEach(context);
-			fail("extension.afterEach(context) should have thrown an exception");
-		} catch (Exception e) {
-			assertThat(e, is(instanceOf(IllegalStateException.class)));
-			assertThat(e.getMessage(), startsWith("The Gherkin Runner has changed during execution of class"));
-		}
-	}
+    @Test
+    public void testAfterEachWithArrayIndexOutOfBoundsException() throws Exception {
+        // prepare step
+        StepStore step = new StepStore("someStapName", StepType.GIVEN, ExecutionStatus.FAILED,
+                new ArrayIndexOutOfBoundsException("Index: 3"));
+        when(runner.getFailedStep()).thenReturn(step);
+        // execute method
+        assertThrows(ArrayIndexOutOfBoundsException.class, () -> {
+            extension.afterEach(context);
+        });
+    }
 
-	public void testMockMethod() {
+    @Test
+    public void testAfterEachWithoutExceptionAvailable() throws Exception {
+        // prepare step
+        StepStore step = new StepStore("someStapName", StepType.GIVEN, ExecutionStatus.FAILED, null);
+        when(runner.getFailedStep()).thenReturn(step);
+        // execute method
+        try {
+            extension.afterEach(context);
+            fail("extension.afterEach(context) should have thrown an exception");
+        } catch (Exception e) {
+            assertThat(e, is(instanceOf(IllegalStateException.class)));
+            assertThat(e.getMessage(), is(equalTo(
+                    String.format("The step '%s' failed, but there was no exception available", "someStapName"))));
+        }
+    }
 
-	}
+    @Test
+    public void testIfCheckRunnerReturnsFalseOnNull() {
+        when(holder.getRunner()).thenReturn(null);
+        try {
+            extension.afterEach(context);
+            fail("extension.afterEach(context) should have thrown an exception");
+        } catch (Exception e) {
+            assertThat(e, is(instanceOf(IllegalStateException.class)));
+            assertThat(e.getMessage(), startsWith("The Gherkin Runner has changed during execution of class"));
+        }
+    }
+
+    public void testMockMethod() {
+
+    }
 }

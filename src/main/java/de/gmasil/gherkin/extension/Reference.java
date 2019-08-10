@@ -1,6 +1,6 @@
 /**
  * Gherkin Extension Jupiter
- * Copyright © 2019 Gmasil
+ * Copyright © 2022 Gmasil
  *
  * This file is part of Gherkin Extension Jupiter.
  *
@@ -20,13 +20,14 @@
 package de.gmasil.gherkin.extension;
 
 public class Reference<T> {
-	private T value;
 
-	public T get() {
-		return value;
-	}
+    private T value;
 
-	public void set(T value) {
-		this.value = value;
-	}
+    public T get() {
+        return value;
+    }
+
+    public void set(T value) {
+        this.value = value;
+    }
 }

@@ -1,6 +1,6 @@
 /**
  * Gherkin Extension Jupiter
- * Copyright © 2019 Gmasil
+ * Copyright © 2022 Gmasil
  *
  * This file is part of Gherkin Extension Jupiter.
  *
@@ -25,69 +25,70 @@ import java.util.List;
 import de.gmasil.gherkin.extension.store.StepStore;
 
 public class GherkinRunner {
-	private String className;
-	private String methodName;
-	private String scenarioName;
 
-	private boolean failed = false;
-	private List<StepStore> steps = new LinkedList<>();
-	private StepStore failedStep = null;
+    private String className;
+    private String methodName;
+    private String scenarioName;
 
-	public GherkinRunner(String className, String methodName, String scenarioName) {
-		this.className = className;
-		this.methodName = methodName;
-		if (scenarioName == null) {
-			this.scenarioName = methodName;
-		} else {
-			this.scenarioName = scenarioName;
-		}
-	}
+    private boolean failed = false;
+    private List<StepStore> steps = new LinkedList<>();
+    private StepStore failedStep = null;
 
-	public void executeStep(String name, GherkinRunnable runnable, StepType type) {
-		ExecutionStatus stepStatus = ExecutionStatus.SKIPPED;
-		Throwable stepException = null;
-		if (!failed) {
-			try {
-				runnable.execute();
-				stepStatus = ExecutionStatus.SUCCESS;
-			} catch (Throwable t) {
-				failed = true;
-				stepException = t;
-				stepStatus = ExecutionStatus.FAILED;
-			}
-		}
-		StepStore currentStep = new StepStore(name, type, stepStatus, stepException);
-		if (stepStatus == ExecutionStatus.FAILED) {
-			failedStep = currentStep;
-		}
-		steps.add(currentStep);
-	}
+    public GherkinRunner(String className, String methodName, String scenarioName) {
+        this.className = className;
+        this.methodName = methodName;
+        if (scenarioName == null) {
+            this.scenarioName = methodName;
+        } else {
+            this.scenarioName = scenarioName;
+        }
+    }
 
-	public boolean isFailed() {
-		return failed;
-	}
+    public void executeStep(String name, GherkinRunnable runnable, StepType type) {
+        ExecutionStatus stepStatus = ExecutionStatus.SKIPPED;
+        Throwable stepException = null;
+        if (!failed) {
+            try {
+                runnable.execute();
+                stepStatus = ExecutionStatus.SUCCESS;
+            } catch (Throwable t) {
+                failed = true;
+                stepException = t;
+                stepStatus = ExecutionStatus.FAILED;
+            }
+        }
+        StepStore currentStep = new StepStore(name, type, stepStatus, stepException);
+        if (stepStatus == ExecutionStatus.FAILED) {
+            failedStep = currentStep;
+        }
+        steps.add(currentStep);
+    }
 
-	public List<StepStore> getSteps() {
-		return steps;
-	}
+    public boolean isFailed() {
+        return failed;
+    }
 
-	public boolean isFrom(String className, String methodName) {
-		return getClassName().equals(className) && getMethodName().equals(methodName);
-	}
+    public List<StepStore> getSteps() {
+        return steps;
+    }
 
-	public String getClassName() {
-		return className;
-	}
+    public boolean isFrom(String className, String methodName) {
+        return getClassName().equals(className) && getMethodName().equals(methodName);
+    }
 
-	public String getMethodName() {
-		return methodName;
-	}
+    public String getClassName() {
+        return className;
+    }
 
-	public String getScenarioName() {
-		return scenarioName;
-	}
+    public String getMethodName() {
+        return methodName;
+    }
 
-	public StepStore getFailedStep() {
-		return failedStep;
-	}
+    public String getScenarioName() {
+        return scenarioName;
+    }
+
+    public StepStore getFailedStep() {
+        return failedStep;
+    }
 }

@@ -1,6 +1,6 @@
 /**
  * Gherkin Extension Jupiter
- * Copyright © 2019 Simon Oelerich
+ * Copyright © 2022 Gmasil
  *
  * This file is part of Gherkin Extension Jupiter.
  *
@@ -20,27 +20,28 @@
 package de.gmasil.gherkin.example.dummy;
 
 public class User {
-	private String username;
-	private String password;
 
-	public User(String username, String password) {
-		this.username = username;
-		this.password = password;
-	}
+    private String username;
+    private String password;
 
-	public String getUsername() {
-		return username;
-	}
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
+    public String getUsername() {
+        return username;
+    }
 
-	public String getPassword() {
-		return password;
-	}
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 }

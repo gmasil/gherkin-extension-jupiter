@@ -1,6 +1,6 @@
 /**
  * Gherkin Extension Jupiter
- * Copyright © 2019 Gmasil
+ * Copyright © 2022 Gmasil
  *
  * This file is part of Gherkin Extension Jupiter.
  *
@@ -20,5 +20,5 @@
 package de.gmasil.gherkin.extension;
 
 public enum ExecutionStatus {
-	SKIPPED, SUCCESS, FAILED
+    SKIPPED, SUCCESS, FAILED
 }

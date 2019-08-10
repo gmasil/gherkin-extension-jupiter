@@ -1,6 +1,6 @@
 /**
  * Gherkin Extension Jupiter
- * Copyright © 2019 Gmasil
+ * Copyright © 2022 Gmasil
  *
  * This file is part of Gherkin Extension Jupiter.
  *
@@ -26,37 +26,41 @@ import de.gmasil.gherkin.extension.ExecutionStatus;
 import de.gmasil.gherkin.extension.StepType;
 
 public class StepStore {
-	private StepType type;
-	private String name;
-	private ExecutionStatus status;
-	@JsonIgnore
-	private Throwable exception;
 
-	public StepStore(String name, StepType type, ExecutionStatus status, Throwable exception) {
-		this.name = name;
-		this.type = type;
-		this.status = status;
-		this.exception = exception;
-	}
+    private StepType type;
 
-	public String getName() {
-		return name;
-	}
+    private String name;
 
-	public StepType getType() {
-		return type;
-	}
+    private ExecutionStatus status;
 
-	public ExecutionStatus getStatus() {
-		return status;
-	}
+    @JsonIgnore
+    private Throwable exception;
 
-	public Throwable getException() {
-		return exception;
-	}
+    public StepStore(String name, StepType type, ExecutionStatus status, Throwable exception) {
+        this.name = name;
+        this.type = type;
+        this.status = status;
+        this.exception = exception;
+    }
 
-	@JacksonXmlProperty(isAttribute = true)
-	public String getReadable() {
-		return String.format("%s %s", type.getName(), name);
-	}
+    public String getName() {
+        return name;
+    }
+
+    public StepType getType() {
+        return type;
+    }
+
+    public ExecutionStatus getStatus() {
+        return status;
+    }
+
+    public Throwable getException() {
+        return exception;
+    }
+
+    @JacksonXmlProperty(isAttribute = true)
+    public String getReadable() {
+        return String.format("%s %s", type.getName(), name);
+    }
 }

@@ -1,6 +1,6 @@
 /**
  * Gherkin Extension Jupiter
- * Copyright © 2019 Simon Oelerich
+ * Copyright © 2022 Gmasil
  *
  * This file is part of Gherkin Extension Jupiter.
  *
@@ -20,7 +20,7 @@
 package de.gmasil.gherkin.example.dummy;
 
 public class Database {
-	public void save(Object o) {
 
-	}
+    public void save(Object o) {
+    }
 }

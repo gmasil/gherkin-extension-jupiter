@@ -1,6 +1,6 @@
 /**
  * Gherkin Extension Jupiter
- * Copyright © 2019 Gmasil
+ * Copyright © 2022 Gmasil
  *
  * This file is part of Gherkin Extension Jupiter.
  *
@@ -23,23 +23,24 @@ import org.junit.jupiter.api.extension.ExtendWith;
 
 @ExtendWith(GherkinExtension.class)
 public interface Gherkin extends GherkinRunnerHolder {
-	default void given(String name, GherkinRunnable runnable) {
-		step(name, runnable, StepType.GIVEN);
-	}
 
-	default void when(String name, GherkinRunnable runnable) {
-		step(name, runnable, StepType.WHEN);
-	}
+    default void given(String name, GherkinRunnable runnable) {
+        step(name, runnable, StepType.GIVEN);
+    }
 
-	default void then(String name, GherkinRunnable runnable) {
-		step(name, runnable, StepType.THEN);
-	}
+    default void when(String name, GherkinRunnable runnable) {
+        step(name, runnable, StepType.WHEN);
+    }
 
-	default void and(String name, GherkinRunnable runnable) {
-		step(name, runnable, StepType.AND);
-	}
+    default void then(String name, GherkinRunnable runnable) {
+        step(name, runnable, StepType.THEN);
+    }
 
-	default void step(String name, GherkinRunnable runnable, StepType type) {
-		getRunner().executeStep(name, runnable, type);
-	}
+    default void and(String name, GherkinRunnable runnable) {
+        step(name, runnable, StepType.AND);
+    }
+
+    default void step(String name, GherkinRunnable runnable, StepType type) {
+        getRunner().executeStep(name, runnable, type);
+    }
 }

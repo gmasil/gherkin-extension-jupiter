@@ -1,6 +1,6 @@
 /**
  * Gherkin Extension Jupiter
- * Copyright © 2019 Gmasil
+ * Copyright © 2022 Gmasil
  *
  * This file is part of Gherkin Extension Jupiter.
  *
@@ -30,5 +30,6 @@ import org.junit.jupiter.api.Test;
 @Target(ElementType.METHOD)
 @Test
 public @interface Scenario {
-	String value();
+
+    String value();
 }
