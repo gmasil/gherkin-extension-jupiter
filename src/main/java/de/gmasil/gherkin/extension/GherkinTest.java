@@ -19,7 +19,7 @@
  */
 package de.gmasil.gherkin.extension;
 
-public class GherkinAdapter implements Gherkin {
+public class GherkinTest implements Gherkin {
 	private GherkinRunner runner;
 
 	@Override

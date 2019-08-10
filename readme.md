@@ -24,7 +24,7 @@ Add the repository to your pom or settings:
 
 ```java
 @Story("A normal user may not change any system settings")
-public class ExampleTest extends GherkinAdapter {
+public class ExampleTest extends GherkinTest {
   @Scenario("A normal user does not see the admin menu")
   public void testNormalUserHasNoAdminMenu(Reference<User> user) {
     given("the user 'Peter' with password 'secret' exists", () -> {

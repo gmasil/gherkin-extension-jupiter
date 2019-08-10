@@ -24,7 +24,7 @@ import org.junit.jupiter.api.parallel.ExecutionMode;
 
 @Execution(ExecutionMode.CONCURRENT)
 @Story("The Gherkin Extension does not get confused by parallel test execution")
-public class GherkinParallelTest extends GherkinAdapter {
+public class GherkinParallelTest extends GherkinTest {
 	// @formatter:off
 	@Scenario("Scenario A")public void testA(){given("something is there",()->{Thread.sleep(100);});then("everything is alright",()->{Thread.sleep(100);});}
 	@Scenario("Scenario B")public void testB(){given("something is there",()->{Thread.sleep(100);});then("everything is alright",()->{Thread.sleep(100);});}

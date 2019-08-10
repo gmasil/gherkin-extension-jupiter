@@ -33,7 +33,7 @@ import org.junit.jupiter.api.parallel.ExecutionMode;
 @Execution(ExecutionMode.SAME_THREAD)
 @TestMethodOrder(OrderAnnotation.class)
 @Story("A test method only annotated with the @Scenario annotation will be executed")
-public class ScenarioTest extends GherkinAdapter {
+public class ScenarioTest extends GherkinTest {
 	private static boolean scenarioWasExecuted = false;
 
 	@Order(1)

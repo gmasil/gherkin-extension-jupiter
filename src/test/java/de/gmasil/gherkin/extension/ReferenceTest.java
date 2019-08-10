@@ -23,7 +23,7 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class ReferenceTest extends GherkinAdapter {
+public class ReferenceTest extends GherkinTest {
 	@Scenario("A reference can be requested")
 	public void testLoc(Reference<String> name) {
 		given("the name 'Peter' is saved in the reference", () -> {

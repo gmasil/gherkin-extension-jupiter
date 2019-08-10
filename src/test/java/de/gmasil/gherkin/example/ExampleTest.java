@@ -30,14 +30,14 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import de.gmasil.gherkin.example.dummy.Database;
 import de.gmasil.gherkin.example.dummy.User;
 import de.gmasil.gherkin.example.dummy.WebDriver;
-import de.gmasil.gherkin.extension.GherkinAdapter;
+import de.gmasil.gherkin.extension.GherkinTest;
 import de.gmasil.gherkin.extension.Reference;
 import de.gmasil.gherkin.extension.Scenario;
 import de.gmasil.gherkin.extension.Story;
 
 @Story("A normal user may not change any system settings")
 @ExtendWith(MockitoExtension.class)
-public class ExampleTest extends GherkinAdapter {
+public class ExampleTest extends GherkinTest {
 	@Mock
 	private Database database;
 
