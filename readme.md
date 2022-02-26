@@ -7,7 +7,7 @@ Maven dependency:
     <dependency>
       <groupId>de.gmasil</groupId>
       <artifactId>gherkin-extension-jupiter</artifactId>
-      <version>1.1</version>
+      <version>${gherkin-extension.version}</version>
       <scope>test</scope>
     </dependency>
 
