@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>de.gmasil</groupId>
     <artifactId>gherkin-extension-jupiter</artifactId>
@@ -6,13 +7,13 @@
     <name>Gherkin Extension Jupiter</name>
     <description>JUnit Jupiter extension to write tests in gherkin style</description>
 
-    <inceptionYear>2022</inceptionYear>
+    <inceptionYear>2019 - 2022</inceptionYear>
     <url>https://github.com/gmasil/gherkin-extension-jupiter</url>
 
-	<organization>
-		<name>Gmasil</name>
-		<url>https://gmasil.de</url>
-	</organization>
+    <organization>
+        <name>Gmasil</name>
+        <url>https://gmasil.de</url>
+    </organization>
 
     <licenses>
         <license>
@@ -137,124 +138,124 @@
         </profile>
     </profiles>
 
-	<build>
-		<plugins>
+    <build>
+        <plugins>
 			<!-- surefire -->
-			<plugin>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<version>${surefire.version}</version>
-				<configuration>
-					<skipTests>${skip.surefire.tests}</skipTests>
-				</configuration>
-			</plugin>
+            <plugin>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${surefire.version}</version>
+                <configuration>
+                    <skipTests>${skip.surefire.tests}</skipTests>
+                </configuration>
+            </plugin>
 			<!-- failsafe -->
-			<plugin>
-				<artifactId>maven-failsafe-plugin</artifactId>
-				<version>${failsafe.version}</version>
-				<configuration>
-					<reportsDirectory>${project.build.directory}/surefire-reports</reportsDirectory>
-				</configuration>
-				<executions>
-					<execution>
-						<goals>
-							<goal>integration-test</goal>
-							<goal>verify</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
+            <plugin>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <version>${failsafe.version}</version>
+                <configuration>
+                    <reportsDirectory>${project.build.directory}/surefire-reports</reportsDirectory>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>integration-test</goal>
+                            <goal>verify</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
 			<!-- jacoco -->
-			<plugin>
-				<groupId>org.jacoco</groupId>
-				<artifactId>jacoco-maven-plugin</artifactId>
-				<version>${jacoco.version}</version>
-				<executions>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>${jacoco.version}</version>
+                <executions>
 					<!-- unit tests -->
-					<execution>
-						<id>pre-unit-test</id>
-						<goals>
-							<goal>prepare-agent</goal>
-						</goals>
-						<configuration>
-							<destFile>${project.build.directory}/jacoco.exec</destFile>
-						</configuration>
-					</execution>
+                    <execution>
+                        <id>pre-unit-test</id>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                        <configuration>
+                            <destFile>${project.build.directory}/jacoco.exec</destFile>
+                        </configuration>
+                    </execution>
 					<!-- integration tests -->
-					<execution>
-						<id>pre-integration-test</id>
-						<phase>pre-integration-test</phase>
-						<goals>
-							<goal>prepare-agent</goal>
-						</goals>
-						<configuration>
-							<destFile>${project.build.directory}/jacoco-it.exec</destFile>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
+                    <execution>
+                        <id>pre-integration-test</id>
+                        <phase>pre-integration-test</phase>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                        <configuration>
+                            <destFile>${project.build.directory}/jacoco-it.exec</destFile>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
 			<!-- source jar for deploy -->
-			<plugin>
-				<artifactId>maven-source-plugin</artifactId>
-				<version>${source-plugin.version}</version>
-				<executions>
-					<execution>
-						<id>attach-sources</id>
-						<phase>verify</phase>
-						<goals>
-							<goal>jar-no-fork</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
+            <plugin>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>${source-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>jar-no-fork</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
 			<!-- javadoc jar for deploy -->
-			<plugin>
-				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>${javadoc-plugin.version}</version>
-				<configuration>
-					<skip>${maven.source.skip}</skip>
-				</configuration>
-				<executions>
-					<execution>
-						<id>attach-javadocs</id>
-						<phase>verify</phase>
-						<goals>
-							<goal>jar</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
+            <plugin>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>${javadoc-plugin.version}</version>
+                <configuration>
+                    <skip>${maven.source.skip}</skip>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
 			<!-- license -->
-			<plugin>
-				<groupId>com.mycila</groupId>
-				<artifactId>license-maven-plugin</artifactId>
-				<version>${license-plugin.version}</version>
-				<configuration>
-					<header>${project.basedir}/license/templates/gnu_gpl_v3.txt</header>
-					<properties>
+            <plugin>
+                <groupId>com.mycila</groupId>
+                <artifactId>license-maven-plugin</artifactId>
+                <version>${license-plugin.version}</version>
+                <configuration>
+                    <header>${project.basedir}/license/templates/gnu_gpl_v3.txt</header>
+                    <properties>
                         <owner>Gmasil</owner>
                         <software.name>${project.name}</software.name>
-					</properties>
-					<includes>
-						<include>src/main/java/**</include>
-						<include>src/main/resources/**</include>
-						<include>src/test/java/**</include>
-						<include>src/test/resources/**</include>
-					</includes>
-					<excludes>
-						<exclude>**/LICENSE.txt</exclude>
-					</excludes>
-				</configuration>
-				<executions>
-					<execution>
-						<phase>validate</phase>
-						<goals>
-							<goal>check</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-		</plugins>
-	</build>
+                    </properties>
+                    <includes>
+                        <include>src/main/java/**</include>
+                        <include>src/main/resources/**</include>
+                        <include>src/test/java/**</include>
+                        <include>src/test/resources/**</include>
+                    </includes>
+                    <excludes>
+                        <exclude>**/LICENSE.txt</exclude>
+                    </excludes>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 
     <distributionManagement>
         <repository>
