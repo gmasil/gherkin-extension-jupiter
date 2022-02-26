@@ -1,5 +1,7 @@
 # Gherkin Extension Jupiter
-This project is Junit 5 (Jupiter) extension to allow writing tests in a gherkin like style.
+This project is a Junit 5 (Jupiter) extension to allow writing auditable tests in a gherkin like style.
+
+To create audit reports or enforce auditable tests take a look at the [Gherkin Maven Plugin](https://github.com/gmasil/gherkin-maven-plugin).
 
 ## Maven
 Maven dependency:
