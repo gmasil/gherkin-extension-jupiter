@@ -1,3 +1,24 @@
+<!--
+
+    Gherkin Extension Jupiter
+    Copyright © 2019 - 2022 Gmasil
+
+    This file is part of Gherkin Extension Jupiter.
+
+    Gherkin Extension Jupiter is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Gherkin Extension Jupiter is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Gherkin Extension Jupiter.  If not, see <https://www.gnu.org/licenses/>.
+
+-->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
@@ -140,7 +161,7 @@
 
     <build>
         <plugins>
-			<!-- surefire -->
+            <!-- surefire -->
             <plugin>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>${surefire.version}</version>
@@ -148,7 +169,7 @@
                     <skipTests>${skip.surefire.tests}</skipTests>
                 </configuration>
             </plugin>
-			<!-- failsafe -->
+            <!-- failsafe -->
             <plugin>
                 <artifactId>maven-failsafe-plugin</artifactId>
                 <version>${failsafe.version}</version>
@@ -164,13 +185,13 @@
                     </execution>
                 </executions>
             </plugin>
-			<!-- jacoco -->
+            <!-- jacoco -->
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <version>${jacoco.version}</version>
                 <executions>
-					<!-- unit tests -->
+                    <!-- unit tests -->
                     <execution>
                         <id>pre-unit-test</id>
                         <goals>
@@ -180,7 +201,7 @@
                             <destFile>${project.build.directory}/jacoco.exec</destFile>
                         </configuration>
                     </execution>
-					<!-- integration tests -->
+                    <!-- integration tests -->
                     <execution>
                         <id>pre-integration-test</id>
                         <phase>pre-integration-test</phase>
@@ -193,7 +214,7 @@
                     </execution>
                 </executions>
             </plugin>
-			<!-- source jar for deploy -->
+            <!-- source jar for deploy -->
             <plugin>
                 <artifactId>maven-source-plugin</artifactId>
                 <version>${source-plugin.version}</version>
@@ -207,7 +228,7 @@
                     </execution>
                 </executions>
             </plugin>
-			<!-- javadoc jar for deploy -->
+            <!-- javadoc jar for deploy -->
             <plugin>
                 <artifactId>maven-javadoc-plugin</artifactId>
                 <version>${javadoc-plugin.version}</version>
@@ -224,7 +245,7 @@
                     </execution>
                 </executions>
             </plugin>
-			<!-- license -->
+            <!-- license -->
             <plugin>
                 <groupId>com.mycila</groupId>
                 <artifactId>license-maven-plugin</artifactId>
@@ -240,6 +261,7 @@
                         <include>src/main/resources/**</include>
                         <include>src/test/java/**</include>
                         <include>src/test/resources/**</include>
+                        <include>pom.xml</include>
                     </includes>
                     <excludes>
                         <exclude>**/LICENSE.txt</exclude>
@@ -260,11 +282,11 @@
     <distributionManagement>
         <repository>
             <id>nexus</id>
-            <url>http://localhost:8081/repository/maven-releases/</url>
+            <url>https://nexus.gmasil.de/repository/maven-releases/</url>
         </repository>
         <snapshotRepository>
             <id>nexus</id>
-            <url>http://localhost:8081/repository/maven-snapshots/</url>
+            <url>https://nexus.gmasil.de/repository/maven-snapshots/</url>
         </snapshotRepository>
     </distributionManagement>
 </project>
