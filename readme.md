@@ -29,6 +29,7 @@ public class ExampleTest extends GherkinTest {
   public void testNormalUserHasNoAdminMenu(Reference<User> user) {
     given("the user 'Peter' with password 'secret' exists", () -> {
       user.set(new User("Peter", "secret"));
+      database.save(user.get());
     });
     when("the user logs in", () -> {
       driver.fillTextfield("loginform-username", user.get().getUsername());
