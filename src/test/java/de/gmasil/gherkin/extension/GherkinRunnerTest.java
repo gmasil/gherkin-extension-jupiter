@@ -25,10 +25,10 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 import org.junit.jupiter.api.Test;
 
-public class GherkinRunnerTest {
+class GherkinRunnerTest {
 
     @Test
-    public void testRunnerWithFailingStep() {
+    void testRunnerWithFailingStep() {
         GherkinRunner runner = new GherkinRunner("My.class", "My.method", "My scenario");
         runner.executeStep("a step fails", () -> {
             assertThat("Peter", is(equalTo("Panda")));
@@ -36,7 +36,7 @@ public class GherkinRunnerTest {
     }
 
     @Test
-    public void testRunnerDoesNotExecuteStepAfterFailing() {
+    void testRunnerDoesNotExecuteStepAfterFailing() {
         GherkinRunner runner = new GherkinRunner("My.class", "My.method", "My scenario");
         // execute GIVEN which fails
         Reference<Boolean> givenExecuted = new Reference<>();
@@ -60,7 +60,7 @@ public class GherkinRunnerTest {
     }
 
     @Test
-    public void testIsFromRecognition() {
+    void testIsFromRecognition() {
         GherkinRunner runner = new GherkinRunner("class", "method", "");
         assertThat(runner.isFrom("class", "---"), is(equalTo(false)));
         assertThat(runner.isFrom("---", "method"), is(equalTo(false)));

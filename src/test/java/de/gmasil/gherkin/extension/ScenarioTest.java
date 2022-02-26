@@ -33,13 +33,13 @@ import org.junit.jupiter.api.parallel.ExecutionMode;
 @Execution(ExecutionMode.SAME_THREAD)
 @TestMethodOrder(OrderAnnotation.class)
 @Story("A test method only annotated with the @Scenario annotation will be executed")
-public class ScenarioTest extends GherkinTest {
+class ScenarioTest extends GherkinTest {
 
     private static boolean scenarioWasExecuted = false;
 
     @Order(1)
     @Scenario("A @Scenario annotated method does not require the @Test annotation")
-    public void testScenarioActsLikeTestAnnotation() {
+    void testScenarioActsLikeTestAnnotation() {
         when("a scenario is started", () -> {
             scenarioWasExecuted = true;
         });
@@ -50,7 +50,7 @@ public class ScenarioTest extends GherkinTest {
 
     @Test
     @Order(2)
-    public void testIfScenarioWasActuallyExecuted() {
+    void testIfScenarioWasActuallyExecuted() {
         assertThat(scenarioWasExecuted, is(equalTo(true)));
     }
 }

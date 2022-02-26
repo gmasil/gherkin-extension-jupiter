@@ -37,7 +37,6 @@ import org.junit.jupiter.api.extension.ExtensionContext;
 import org.junit.jupiter.api.extension.ExtensionContext.Store;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.junit.jupiter.MockitoSettings;
 import org.mockito.quality.Strictness;
@@ -47,7 +46,7 @@ import de.gmasil.gherkin.extension.store.StoryStore;
 
 @ExtendWith(MockitoExtension.class)
 @MockitoSettings(strictness = Strictness.LENIENT)
-public class GherkinExtensionTest {
+class GherkinExtensionTest {
 
     @InjectMocks
     private GherkinExtension extension = new GherkinExtension();
@@ -69,7 +68,6 @@ public class GherkinExtensionTest {
 
     @BeforeEach
     public void initMocks() throws Exception {
-        MockitoAnnotations.initMocks(this);
         // prepare runner
         when(runner.isFrom(any(), any())).thenReturn(true);
         when(runner.isFailed()).thenReturn(true);
@@ -86,7 +84,7 @@ public class GherkinExtensionTest {
     }
 
     @Test
-    public void testAfterEachWithAssertionError() throws Exception {
+    void testAfterEachWithAssertionError() throws Exception {
         // prepare step
         StepStore step = new StepStore("someStapName", StepType.GIVEN, ExecutionStatus.FAILED,
                 new AssertionError("A != B"));
@@ -98,7 +96,7 @@ public class GherkinExtensionTest {
     }
 
     @Test
-    public void testAfterEachWithArrayIndexOutOfBoundsException() throws Exception {
+    void testAfterEachWithArrayIndexOutOfBoundsException() throws Exception {
         // prepare step
         StepStore step = new StepStore("someStapName", StepType.GIVEN, ExecutionStatus.FAILED,
                 new ArrayIndexOutOfBoundsException("Index: 3"));
@@ -110,7 +108,7 @@ public class GherkinExtensionTest {
     }
 
     @Test
-    public void testAfterEachWithoutExceptionAvailable() throws Exception {
+    void testAfterEachWithoutExceptionAvailable() throws Exception {
         // prepare step
         StepStore step = new StepStore("someStapName", StepType.GIVEN, ExecutionStatus.FAILED, null);
         when(runner.getFailedStep()).thenReturn(step);
@@ -126,7 +124,7 @@ public class GherkinExtensionTest {
     }
 
     @Test
-    public void testIfCheckRunnerReturnsFalseOnNull() {
+    void testIfCheckRunnerReturnsFalseOnNull() {
         when(holder.getRunner()).thenReturn(null);
         try {
             extension.afterEach(context);

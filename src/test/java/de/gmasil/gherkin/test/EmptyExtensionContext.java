@@ -24,10 +24,12 @@ import java.lang.reflect.Method;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+import java.util.function.Function;
 
 import org.junit.jupiter.api.TestInstance.Lifecycle;
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.junit.jupiter.api.extension.TestInstances;
+import org.junit.jupiter.api.parallel.ExecutionMode;
 
 public class EmptyExtensionContext implements ExtensionContext {
 
@@ -102,6 +104,16 @@ public class EmptyExtensionContext implements ExtensionContext {
 
     @Override
     public Store getStore(Namespace namespace) {
+        return null;
+    }
+
+    @Override
+    public <T> Optional<T> getConfigurationParameter(String key, Function<String, T> transformer) {
+        return null;
+    }
+
+    @Override
+    public ExecutionMode getExecutionMode() {
         return null;
     }
 }
