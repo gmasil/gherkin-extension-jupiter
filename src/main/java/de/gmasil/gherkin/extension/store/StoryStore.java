@@ -38,6 +38,9 @@ public class StoryStore {
     @JacksonXmlProperty(localName = "scenario")
     private List<ScenarioStore> scenarios = new ArrayList<>();
 
+    public StoryStore() {
+    }
+
     public StoryStore(String name, String className) {
         this.name = name;
         this.className = className;

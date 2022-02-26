@@ -40,6 +40,9 @@ public class ScenarioStore {
     @JacksonXmlProperty(localName = "step")
     private List<StepStore> steps = new LinkedList<>();
 
+    public ScenarioStore() {
+    }
+
     public ScenarioStore(String name, String methodName, boolean failed) {
         this.name = name;
         this.methodName = methodName;

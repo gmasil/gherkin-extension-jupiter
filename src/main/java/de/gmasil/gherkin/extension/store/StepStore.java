@@ -20,11 +20,13 @@
 package de.gmasil.gherkin.extension.store;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
 import de.gmasil.gherkin.extension.ExecutionStatus;
 import de.gmasil.gherkin.extension.StepType;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class StepStore {
 
     private StepType type;
@@ -35,6 +37,9 @@ public class StepStore {
 
     @JsonIgnore
     private Throwable exception;
+
+    public StepStore() {
+    }
 
     public StepStore(String name, StepType type, ExecutionStatus status, Throwable exception) {
         this.name = name;
