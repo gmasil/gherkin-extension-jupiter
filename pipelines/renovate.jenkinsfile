@@ -5,6 +5,9 @@ pipeline {
             args "-v /maven:/maven -v /root/.gnupg:/root/.gnupg -v /root/.ssh:/root/.ssh -v /root/.docker/config.json:/root/.docker/config.json -e JAVA_TOOL_OPTIONS='-Duser.home=/maven'"
         }
     }
+    triggers {
+        cron('15 7 * * *')
+    }
     stages {
         stage("Preparation") {
             steps {
