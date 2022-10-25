@@ -1,4 +1,4 @@
-/**
+/*
  * Gherkin Extension Jupiter
  * Copyright © 2019 - 2022 Gmasil
  *

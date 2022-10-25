@@ -1,4 +1,4 @@
-/**
+/*
  * Gherkin Extension Jupiter
  * Copyright © 2019 - 2022 Gmasil
  *
@@ -27,6 +27,7 @@ import java.util.Set;
 import java.util.function.Function;
 
 import org.junit.jupiter.api.TestInstance.Lifecycle;
+import org.junit.jupiter.api.extension.ExecutableInvoker;
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.junit.jupiter.api.extension.TestInstances;
 import org.junit.jupiter.api.parallel.ExecutionMode;
@@ -114,6 +115,11 @@ public class EmptyExtensionContext implements ExtensionContext {
 
     @Override
     public ExecutionMode getExecutionMode() {
+        return null;
+    }
+
+    @Override
+    public ExecutableInvoker getExecutableInvoker() {
         return null;
     }
 }
