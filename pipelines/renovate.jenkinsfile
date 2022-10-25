@@ -1,0 +1,92 @@
+pipeline {
+    agent {
+        docker {
+            image "registry.gmasil.de/docker/maven-build-container"
+            args "-v /maven:/maven -v /root/.gnupg:/root/.gnupg -v /root/.ssh:/root/.ssh -v /root/.docker/config.json:/root/.docker/config.json -e JAVA_TOOL_OPTIONS='-Duser.home=/maven'"
+        }
+    }
+    stages {
+        stage("Preparation") {
+            steps {
+                sh("git config user.name \"gmasil\"")
+                sh("git config user.email \"54176035+gmasil@users.noreply.github.com\"")
+                sh("git config commit.gpgsign true")
+                sh("git config user.signingkey 135FC0B941F3ECC7")
+                sh("git branch -D renovate > /dev/null 2>&1 || true")
+                sh("git push origin --delete renovate > /dev/null 2>&1 || true")
+            }
+        }
+        stage("Check for updates") {
+            steps {
+                script {
+                    sh("mvn -U -B versions:display-parent-updates versions:display-property-updates versions:display-plugin-updates --no-transfer-progress -Dmaven.version.rules=https://static.gmasil.de/maven-version-rules.xml | tee maven.log")
+                    def list = parseLog(readFile('maven.log'))
+                    env.HAS_UPDATES = list.size() == 0 ? "false" : "true"
+                    printList(list)
+                }
+            }
+        }
+        stage("Verify updates") {
+            when {
+                expression {
+                    return env.HAS_UPDATES == 'true';
+                }
+            }
+            steps {
+                script {
+                    sh("mvn versions:update-parent versions:use-latest-versions versions:update-properties --no-transfer-progress -Dmaven.version.rules=https://static.gmasil.de/maven-version-rules.xml -DgenerateBackupPoms=false")
+                    sh("mvn clean package --no-transfer-progress")
+                    env.UPDATES_VERIFIED = "true"
+                }
+            }
+        }
+        stage("Renovate") {
+            when {
+                expression {
+                    return env.UPDATES_VERIFIED == 'true';
+                }
+            }
+            steps {
+                sh("git diff")
+                sh("git checkout -b renovate")
+                sh("git add -u")
+                sh("git commit -m \"update dependencies\"")
+                sh("git push --set-upstream origin renovate")
+            }
+        }
+    }
+    post {
+        always {
+            cleanWs()
+            dir("${env.WORKSPACE}@tmp") {
+                deleteDir()
+            }
+        }
+    }
+}
+
+@NonCPS
+def parseLog(mavenLog) {
+    def matches = (mavenLog =~ /\[INFO\]   (?:\$\{)?[^ ]*?([^ :]+?)(?:\.version})? .*?([0-9]+(?:\.[0-9]+)+[a-zA-z0-9-]*) -> ([0-9]+(?:\.[0-9]+)+[a-zA-z0-9-]*)/)
+    def list = []
+    for(def i = 0; i < matches.count; i++) {
+        list[i] = [:]
+        list[i].name = matches[i][1]
+        list[i].version = matches[i][2]
+        list[i].latest = matches[i][3]
+    }
+    return list
+}
+
+def printList(list) {
+    String output = ""
+    if(list.size() > 0) {
+        output += "The following upgrades are available:\n"
+        for(def item : list) {
+            output += "    ${item.name.padRight(40)}   ${item.version.padLeft(8)}  ->  ${item.latest}\n"
+        }
+    } else {
+        output += "Everything is up to date"
+    }
+    echo output
+}
