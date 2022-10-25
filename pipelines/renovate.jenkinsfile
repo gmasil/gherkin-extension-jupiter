@@ -35,6 +35,7 @@ pipeline {
             steps {
                 script {
                     sh("mvn versions:update-parent versions:use-latest-versions versions:update-properties --no-transfer-progress -Dmaven.version.rules=https://static.gmasil.de/maven-version-rules.xml -DgenerateBackupPoms=false")
+                    sh("git diff")
                     sh("mvn clean package --no-transfer-progress")
                     env.UPDATES_VERIFIED = "true"
                 }
