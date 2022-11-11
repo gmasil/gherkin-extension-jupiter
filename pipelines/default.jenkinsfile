@@ -12,7 +12,7 @@ pipeline {
   stages {
     stage("deploy") {
       steps {
-        sh "mvn clean deploy --no-transfer-progress"
+        sh "mvn clean deploy -P create-docs --no-transfer-progress"
       }
     }
     stage("analyze") {
