@@ -20,6 +20,10 @@
 package de.gmasil.gherkin.extension;
 
 import java.io.File;
+import java.lang.reflect.Method;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.extension.AfterAllCallback;
 import org.junit.jupiter.api.extension.AfterEachCallback;
@@ -108,7 +112,7 @@ public class GherkinExtension
             return false;
         }
         return runner.isFrom(context.getRequiredTestInstance().getClass().getName(),
-                context.getRequiredTestMethod().getName());
+                getSurefireCompatibleMethodName(context.getRequiredTestMethod()));
     }
 
     private void createRunner(ExtensionContext context) {
@@ -119,9 +123,19 @@ public class GherkinExtension
             if (scenario != null) {
                 scenarioName = scenario.value();
             }
-            GherkinRunnerHolder.class.cast(instance)
-                    .setRunner(new GherkinRunner(context.getRequiredTestInstance().getClass().getName(),
-                            context.getRequiredTestMethod().getName(), scenarioName));
+            String methodName = getSurefireCompatibleMethodName(context.getRequiredTestMethod());
+            GherkinRunnerHolder.class.cast(instance).setRunner(new GherkinRunner(
+                    context.getRequiredTestInstance().getClass().getName(), methodName, scenarioName));
+        }
+    }
+
+    private String getSurefireCompatibleMethodName(Method method) {
+        List<String> parameterList = Arrays.stream(method.getParameterTypes()).map(Class::getSimpleName)
+                .collect(Collectors.toList());
+        if (parameterList.isEmpty()) {
+            return method.getName();
+        } else {
+            return method.getName() + "(" + String.join(", ", parameterList) + ")";
         }
     }
 
