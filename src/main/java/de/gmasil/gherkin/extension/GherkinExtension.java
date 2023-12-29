@@ -75,8 +75,8 @@ public class GherkinExtension implements BeforeEachCallback, AfterEachCallback, 
         if (runner.isFailed()) {
             Throwable exception = runner.getFailedStep().getException();
             if (exception != null) {
-                if (exception instanceof Exception) {
-                    throw (Exception) exception;
+                if (exception instanceof Exception normalException) {
+                    throw normalException;
                 }
                 throw new ThrowableWrapperException(exception);
             } else {
@@ -121,7 +121,7 @@ public class GherkinExtension implements BeforeEachCallback, AfterEachCallback, 
     }
 
     private String getSurefireCompatibleMethodName(Method method) {
-        List<String> parameterList = Arrays.stream(method.getParameterTypes()).map(Class::getSimpleName).collect(Collectors.toList());
+        List<String> parameterList = Arrays.stream(method.getParameterTypes()).map(Class::getSimpleName).toList();
         if (parameterList.isEmpty()) {
             return method.getName();
         } else {
