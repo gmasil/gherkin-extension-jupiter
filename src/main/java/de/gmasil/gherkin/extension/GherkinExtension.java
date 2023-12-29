@@ -19,12 +19,11 @@
  */
 package de.gmasil.gherkin.extension;
 
-import java.io.File;
-import java.lang.reflect.Method;
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
-
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+import de.gmasil.gherkin.extension.store.ScenarioStore;
+import de.gmasil.gherkin.extension.store.StoryStore;
 import org.junit.jupiter.api.extension.AfterAllCallback;
 import org.junit.jupiter.api.extension.AfterEachCallback;
 import org.junit.jupiter.api.extension.BeforeAllCallback;
@@ -35,15 +34,13 @@ import org.junit.jupiter.api.extension.ExtensionContext.Store;
 import org.junit.jupiter.api.extension.ParameterContext;
 import org.junit.jupiter.api.extension.ParameterResolver;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+import java.io.File;
+import java.lang.reflect.Method;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
-import de.gmasil.gherkin.extension.store.ScenarioStore;
-import de.gmasil.gherkin.extension.store.StoryStore;
-
-public class GherkinExtension
-        implements BeforeEachCallback, AfterEachCallback, BeforeAllCallback, AfterAllCallback, ParameterResolver {
+public class GherkinExtension implements BeforeEachCallback, AfterEachCallback, BeforeAllCallback, AfterAllCallback, ParameterResolver {
 
     private File outputFolder = new File("target/gherkin/");
 
@@ -72,9 +69,7 @@ public class GherkinExtension
     public void afterEach(ExtensionContext context) throws Exception {
         GherkinRunner runner = getRunner(context);
         if (!checkRunner(context, runner)) {
-            throw new IllegalStateException(String.format(
-                    "The Gherkin Runner has changed during execution of class %s:%s",
-                    context.getRequiredTestInstance().getClass().getName(), context.getRequiredTestMethod().getName()));
+            throw new IllegalStateException(String.format("The Gherkin Runner has changed during execution of class %s:%s", context.getRequiredTestInstance().getClass().getName(), context.getRequiredTestMethod().getName()));
         }
         addScenario(context, runner);
         if (runner.isFailed()) {
@@ -85,9 +80,7 @@ public class GherkinExtension
                 }
                 throw new ThrowableWrapperException(exception);
             } else {
-                throw new IllegalStateException(
-                        String.format("The step '%s' failed, but there was no exception available",
-                                runner.getFailedStep().getName()));
+                throw new IllegalStateException(String.format("The step '%s' failed, but there was no exception available", runner.getFailedStep().getName()));
             }
         }
     }
@@ -111,8 +104,7 @@ public class GherkinExtension
         if (runner == null) {
             return false;
         }
-        return runner.isFrom(context.getRequiredTestInstance().getClass().getName(),
-                getSurefireCompatibleMethodName(context.getRequiredTestMethod()));
+        return runner.isFrom(context.getRequiredTestInstance().getClass().getName(), getSurefireCompatibleMethodName(context.getRequiredTestMethod()));
     }
 
     private void createRunner(ExtensionContext context) {
@@ -124,14 +116,12 @@ public class GherkinExtension
                 scenarioName = scenario.value();
             }
             String methodName = getSurefireCompatibleMethodName(context.getRequiredTestMethod());
-            GherkinRunnerHolder.class.cast(instance).setRunner(new GherkinRunner(
-                    context.getRequiredTestInstance().getClass().getName(), methodName, scenarioName));
+            ((GherkinRunnerHolder) instance).setRunner(new GherkinRunner(context.getRequiredTestInstance().getClass().getName(), methodName, scenarioName));
         }
     }
 
     private String getSurefireCompatibleMethodName(Method method) {
-        List<String> parameterList = Arrays.stream(method.getParameterTypes()).map(Class::getSimpleName)
-                .collect(Collectors.toList());
+        List<String> parameterList = Arrays.stream(method.getParameterTypes()).map(Class::getSimpleName).collect(Collectors.toList());
         if (parameterList.isEmpty()) {
             return method.getName();
         } else {
@@ -191,8 +181,7 @@ public class GherkinExtension
 
     public synchronized void addScenario(ExtensionContext context, GherkinRunner runner) {
         StoryStore storyStore = getRequiredStoryStore(context);
-        ScenarioStore scenarioStore = new ScenarioStore(runner.getScenarioName(), runner.getMethodName(),
-                runner.isFailed());
+        ScenarioStore scenarioStore = new ScenarioStore(runner.getScenarioName(), runner.getMethodName(), runner.isFailed());
         scenarioStore.getSteps().addAll(runner.getSteps());
         storyStore.getScenarios().add(scenarioStore);
     }

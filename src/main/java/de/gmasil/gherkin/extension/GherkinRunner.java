@@ -19,10 +19,10 @@
  */
 package de.gmasil.gherkin.extension;
 
+import de.gmasil.gherkin.extension.store.StepStore;
+
 import java.util.LinkedList;
 import java.util.List;
-
-import de.gmasil.gherkin.extension.store.StepStore;
 
 public class GherkinRunner {
 

@@ -19,14 +19,6 @@
  */
 package de.gmasil.gherkin.example;
 
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
-
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
-
 import de.gmasil.gherkin.example.dummy.Database;
 import de.gmasil.gherkin.example.dummy.User;
 import de.gmasil.gherkin.example.dummy.WebDriver;
@@ -34,6 +26,13 @@ import de.gmasil.gherkin.extension.GherkinTest;
 import de.gmasil.gherkin.extension.Reference;
 import de.gmasil.gherkin.extension.Scenario;
 import de.gmasil.gherkin.extension.Story;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 @Story("A normal user may not change any system settings")
 @ExtendWith(MockitoExtension.class)
