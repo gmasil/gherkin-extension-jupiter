@@ -109,14 +109,14 @@ public class GherkinExtension implements BeforeEachCallback, AfterEachCallback, 
 
     private void createRunner(ExtensionContext context) {
         Object instance = context.getRequiredTestInstance();
-        if (instance instanceof GherkinRunnerHolder) {
+        if (instance instanceof GherkinRunnerHolder holder) {
             Scenario scenario = context.getRequiredTestMethod().getAnnotation(Scenario.class);
             String scenarioName = null;
             if (scenario != null) {
                 scenarioName = scenario.value();
             }
             String methodName = getSurefireCompatibleMethodName(context.getRequiredTestMethod());
-            ((GherkinRunnerHolder) instance).setRunner(new GherkinRunner(context.getRequiredTestInstance().getClass().getName(), methodName, scenarioName));
+            holder.setRunner(new GherkinRunner(context.getRequiredTestInstance().getClass().getName(), methodName, scenarioName));
         }
     }
 
