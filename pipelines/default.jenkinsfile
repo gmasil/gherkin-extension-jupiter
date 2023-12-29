@@ -6,8 +6,8 @@ pipeline {
     }
   }
   environment {
-    MAVEN_ARTIFACT = sh(script: "mvn -q -Dexec.executable=echo -Dexec.args='\${project.groupId}:\${project.artifactId}' --non-recursive exec:exec", returnStdout: true).trim()
-    MAVEN_PROJECT_NAME = sh(script: "mvn -q -Dexec.executable=echo -Dexec.args='\${project.name}' --non-recursive exec:exec", returnStdout: true).trim()
+    MAVEN_ARTIFACT = sh(script: "mvn -B -q -Dexec.executable=echo -Dexec.args='\${project.groupId}:\${project.artifactId}' --non-recursive exec:exec | sed -r 's/\\x1B\\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]//g'", returnStdout: true).trim()
+    MAVEN_PROJECT_NAME = sh(script: "mvn -B -q -Dexec.executable=echo -Dexec.args='\${project.name}' --non-recursive exec:exec | sed -r 's/\\x1B\\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]//g'", returnStdout: true).trim()
   }
   stages {
     stage("deploy") {
