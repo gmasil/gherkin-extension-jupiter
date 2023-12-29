@@ -49,18 +49,18 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <!-- versions -->
-        <junit-jupiter.version>5.9.1</junit-jupiter.version>
-        <junit-platform.version>1.9.1</junit-platform.version>
-        <jackson.version>2.14.0</jackson.version>
+        <junit-jupiter.version>5.10.1</junit-jupiter.version>
+        <junit-platform.version>1.10.1</junit-platform.version>
+        <jackson.version>2.16.1</jackson.version>
         <hamcrest.version>1.3</hamcrest.version>
-        <mockito.version>4.8.1</mockito.version>
+        <mockito.version>5.8.0</mockito.version>
         <!-- plugin versions -->
-        <surefire.version>2.22.2</surefire.version>
-        <failsafe.version>2.22.2</failsafe.version>
-        <jacoco.version>0.8.8</jacoco.version>
-        <source-plugin.version>3.2.1</source-plugin.version>
-        <javadoc-plugin.version>3.4.1</javadoc-plugin.version>
-        <license-plugin.version>4.1</license-plugin.version>
+        <surefire.version>3.2.3</surefire.version>
+        <failsafe.version>3.2.3</failsafe.version>
+        <jacoco.version>0.8.11</jacoco.version>
+        <source-plugin.version>3.3.0</source-plugin.version>
+        <javadoc-plugin.version>3.6.3</javadoc-plugin.version>
+        <license-plugin.version>4.3</license-plugin.version>
         <!-- skip test config -->
         <skipITs>true</skipITs>
         <skip.surefire.tests>${skipTests}</skip.surefire.tests>
@@ -92,30 +92,6 @@
             <artifactId>junit-jupiter-engine</artifactId>
             <version>${junit-jupiter.version}</version>
             <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.platform</groupId>
-            <artifactId>junit-platform-runner</artifactId>
-            <version>${junit-platform.version}</version>
-            <scope>test</scope>
-            <exclusions>
-                <exclusion>
-                    <groupId>junit</groupId>
-                    <artifactId>junit</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.platform</groupId>
-            <artifactId>junit-platform-launcher</artifactId>
-            <version>${junit-platform.version}</version>
-            <scope>test</scope>
-            <exclusions>
-                <exclusion>
-                    <groupId>junit</groupId>
-                    <artifactId>junit</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
         <!-- hamcrest -->
         <dependency>
@@ -249,21 +225,25 @@
                 <artifactId>license-maven-plugin</artifactId>
                 <version>${license-plugin.version}</version>
                 <configuration>
-                    <header>${project.basedir}/license/templates/gnu_gpl_v3.txt</header>
                     <properties>
                         <owner>Gmasil</owner>
                         <software.name>${project.name}</software.name>
                     </properties>
-                    <includes>
-                        <include>src/main/java/**</include>
-                        <include>src/main/resources/**</include>
-                        <include>src/test/java/**</include>
-                        <include>src/test/resources/**</include>
-                        <include>pom.xml</include>
-                    </includes>
-                    <excludes>
-                        <exclude>**/LICENSE.txt</exclude>
-                    </excludes>
+                    <licenseSets>
+                        <licenseSet>
+                            <header>${project.basedir}/license/templates/gnu_gpl_v3.txt</header>
+                            <includes>
+                                <include>src/main/java/**</include>
+                                <include>src/main/resources/**</include>
+                                <include>src/test/java/**</include>
+                                <include>src/test/resources/**</include>
+                                <include>pom.xml</include>
+                            </includes>
+                            <excludes>
+                                <exclude>**/LICENSE.txt</exclude>
+                            </excludes>
+                        </licenseSet>
+                    </licenseSets>
                 </configuration>
                 <executions>
                     <execution>
