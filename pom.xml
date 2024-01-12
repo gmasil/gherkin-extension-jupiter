@@ -55,8 +55,8 @@
         <hamcrest.version>1.3</hamcrest.version>
         <mockito.version>5.8.0</mockito.version>
         <!-- plugin versions -->
-        <surefire.version>3.2.3</surefire.version>
-        <failsafe.version>3.2.3</failsafe.version>
+        <surefire.version>3.2.5</surefire.version>
+        <failsafe.version>3.2.5</failsafe.version>
         <jacoco.version>0.8.11</jacoco.version>
         <source-plugin.version>3.3.0</source-plugin.version>
         <javadoc-plugin.version>3.6.3</javadoc-plugin.version>
